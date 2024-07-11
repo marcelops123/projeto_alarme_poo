@@ -1,46 +1,27 @@
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
-
-    static int escolha;
-    static Scanner scan = new Scanner(System.in);
-
-    static Pessoa user = new Pessoa();
-    static ArrayList<Pessoa> pss = new ArrayList<Pessoa>();
-
     public static void main(String[] args) {
-        System.out.println("---SISTEMA DE ALARMES---");
-        System.out.println("---MENU---");
-        System.out.println("Digite 1 para selecionar o cliente responsável");
-        do {
-        escolha = scan.nextInt();
-        switch (escolha) {
-            case 1: {
-                System.out.println("Cadastro de usuário...");
-                System.out.println("Digite o ID do usuário a ser cadastrado");
-                Pessoa user = new Pessoa();
-                int ID = scan.nextInt();
-                String nome = scan.next();
-                user.setId(ID);
-                user.setNome(nome);
-                pss.add(user);
-            }
-            case 2: {
-                System.out.println("Pesquisa de usuário por ID");
-                System.out.println("Digite o ID do usuário que deseja buscar");
-                int idBusca = scan.nextInt();
-                for(int i=0;i<pss.size();i++) {
-                    if(pss.get(i).getId() == idBusca) {
-                        System.out.println(pss.get(i).getId());
-                        System.out.println(pss.get(i).getNome());
-                        break;
-                    } else
-                        System.out.println("Usuário não cadastrado");
-                }
-            }
-        }
-        } while (escolha != 0);
+        Scanner sc = new Scanner(System.in);
+        
+        Camera camera1 = new Camera("Sala de Controle");
+        Camera camera2 = new Camera("Entrada Principal");
+        Camera camera3 = new Camera("Corredor Leste");
+        
+        ArmazenamentoAlarmes armazenamento1 = new ArmazenamentoAlarmes(camera1);
+        ArmazenamentoAlarmes armazenamento2 = new ArmazenamentoAlarmes(camera2);
+        ArmazenamentoAlarmes armazenamento3 = new ArmazenamentoAlarmes(camera3);
+
+        LocalDateTime horarioAtivacao = LocalDateTime.now();
+        Alarme alarme1 = new Alarme("Sala 1", horarioAtivacao, "Intrusão");
+        Alarme alarme2 = new Alarme("Entrada", horarioAtivacao, "Movimento suspeito");
+        Alarme alarme3 = new Alarme("Corredor B", horarioAtivacao, "Quebra de vidro");
+
+        armazenamento1.adicionarAlarme(alarme1);
+        armazenamento2.adicionarAlarme(alarme2);
+        armazenamento3.adicionarAlarme(alarme3);
+
+        sc.close();
     }
 }
