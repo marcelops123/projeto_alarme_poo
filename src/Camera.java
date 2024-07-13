@@ -1,11 +1,32 @@
-public class Camera {
-    private String localizacao;
+package src.main.Java.devices;
 
-    public Camera(String localizacao) {
-        this.localizacao = localizacao;
+public class Camera {
+    private boolean ligada;
+
+    public Camera() {
+        this.ligada = false; // Inicialmente desligada
     }
 
-    public void capturarImagem() {
-        System.out.println("Capturando imagem na câmera em " + localizacao);
+    public void ligar() {
+        this.ligada = true;
+        System.out.println("Câmera ligada.");
+    }
+
+    public void desligar() {
+        this.ligada = false;
+        System.out.println("Câmera desligada.");
+    }
+
+    public void iniciarGravacao() {
+        if (ligada) {
+            System.out.println("Iniciando gravação...");
+            // Lógica para iniciar a gravação em vídeo
+        } else {
+            System.out.println("Câmera não está ligada. Não é possível iniciar gravação.");
+        }
+    }
+
+    public boolean isLigada() {
+        return ligada;
     }
 }
